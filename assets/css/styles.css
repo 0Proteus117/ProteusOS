@@ -1,0 +1,239 @@
+/* Estilos generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Orbitron', sans-serif;
+    background: #ffffffe5;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+/* Contenedor del login */
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 25px rgba(0, 247, 255, 0.8);
+    width: 350px;
+    border: 3px solid #00f7ff;
+}
+
+/* Estilo del título */
+.title {
+    font-size: 30px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    color: #00f7ff;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 3px solid rgba(0, 247, 255, 0.9);
+    padding-bottom: 10px;
+    text-shadow: 0px 0px 10px rgba(0, 247, 255, 0.8);
+}
+
+/* Inputs */
+.input-container input {
+    width: 85%;
+    padding: 10px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 247, 255, 0.3);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    box-shadow: 0px 0px 8px rgba(0, 247, 255, 0.5);
+}
+
+/* Iluminación al escribir */
+.input-container input:focus {
+    border: 2px solid #00f7ff;
+    box-shadow: 0px 0px 15px rgba(0, 247, 255, 1);
+    background: rgba(0, 247, 255, 0.3);
+}
+
+/* Botón */
+.login-btn {
+    width: 85%;
+    height: 40px;
+    padding: 10px;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #00bcd4, #0088cc);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(0, 247, 255, 0.5);
+}
+
+/* Botón hover */
+.login-btn:hover {
+    background: linear-gradient(45deg, #0088cc, #00bcd4);
+    box-shadow: 0px 0px 15px rgba(0, 247, 255, 0.8);
+}
+
+/* Estilos del menú HUD principal */
+.hud-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
+    z-index: 1000;
+}
+
+/* Estilos del submenú de categorías de WiFi */
+.hud-submenu {
+    position: absolute;
+    top: 40px; /* Justo debajo del menú principal */
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    display: none;
+    padding: 10px 0;
+    box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
+    z-index: 999;
+}
+
+.hud-submenu.show {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hud-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.hud-menu ul li {
+    margin: 0 15px;
+}
+
+.hud-menu ul li a {
+    color: #00f7ff;
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+/* Submenú de WiFi justo debajo del menú principal */
+.hud-submenu {
+    position: absolute;
+    top: 40px; /* Justo debajo del menú principal */
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    text-align: center;
+    display: none;
+    padding: 10px 0;
+    box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
+    z-index: 999;
+}
+
+/* Mostrar cuando es activado */
+.hud-submenu.show {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Botón de categoría en el submenú */
+.category-btn {
+    background: rgba(0, 0, 0, 0.8);
+    color: #00f7ff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px solid #00f7ff;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+}
+
+.category-btn:hover {
+    background: #00f7ff;
+    color: black;
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.8);
+}
+
+/* Contenedor de las categorías */
+#wifiCategories, #category-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* Ocultar elementos hasta que se activen */
+.hidden {
+    display: none;
+}
+
+/* Botones de funciones dentro de cada categoría */
+.function-btn {
+    background: rgba(0, 0, 0, 0.9);
+    color: #00f7ff;
+    font-size: 14px;
+    padding: 10px;
+    border: 2px solid #00f7ff;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 5px;
+    display: block;
+    width: 80%;
+    text-align: center;
+}
+
+.function-btn:hover {
+    background: #00f7ff;
+    color: black;
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.8);
+}
+
+/* Contenedor de las categorías */
+#wifiCategories, #category-container {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Ocultar elementos hasta que se activen */
+.hidden {
+    display: none;
+}
+
+/* Subrayado animado en hover */
+.hud-menu ul li a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #00f7ff;
+    transition: width 0.3s ease-in-out;
+}
+
+.hud-menu ul li a:hover::after {
+    width: 100%;
+}

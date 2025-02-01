@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Reach Network</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+    <!-- Contenedor del fondo de partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Caja de login asegurando visibilidad sobre el fondo -->
+    <div class="login-container" id="loginPage">
+        <h1 class="title">PROTOCOLO DE AUTORIZACIÓN</h1>
+        
+        <form class="login-form" onsubmit="checkLogin(event)">
+            <div class="input-container">
+                <input type="text" id="username" placeholder="Credenciales de Acceso" required>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" placeholder="Clave" required>
+            </div>
+            <button type="submit" class="login-btn">Acceder</button>
+        </form>
+    </div>
+
+<!-- Menú Principal -->
+<div id="mainUI" style="display: none;">
+    <nav class="hud-menu">
+        <ul>
+            <li><a href="#" id="wifi">WiFi</a></li>
+            <li><a href="#" id="bluetooth">Bluetooth</a></li>
+            <li><a href="#" id="usb">USB</a></li>
+            <li><a href="#" id="security">Seguridad</a></li>
+            <li><a href="#" id="settings">Ajustes</a></li>
+            <li><a href="#" id="stealth">Stealth</a></li>
+        </ul>
+    </nav>
+
+    <!-- Submenú de categorías de WiFi -->
+    <nav class="hud-submenu hidden" id="wifiCategories">
+        <ul>
+            <li><button class="category-btn" data-category="diplomacy">DIPLOMACIA</button></li>
+            <li><button class="category-btn" data-category="recon">RECONOCIMIENTO</button></li>
+            <li><button class="category-btn" data-category="infiltration">INFILTRACIÓN</button></li>
+        </ul>
+    </nav>
+
+    <!-- Contenedor donde aparecerán los botones de las acciones -->
+    <div id="category-container" class="hidden"></div>
+</div>
+
+    <!-- Scripts para partículas y funcionalidad -->
+    <script src="https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.min.js"></script>
+    <script src="assets/js/particles.js"></script> <!-- Cargar configuración de partículas -->
+    <script src="assets/js/script.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Inicializando partículas con detección de iPhone...");
+
+            let isMobile = window.innerWidth <= 430; // Detectar si es móvil
+
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": isMobile ? 50 : 250, "density": { "enable": true, "value_area": isMobile ? 800 : 1200 } },
+                    "color": { "value": [ "#00f7ff", "#ffffff"] },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.8, "random": true },
+                    "size": { "value": isMobile ? 3 : 4, "random": true },
+                    "move": {
+                        "enable": true,
+                        "speed": isMobile ? 2 : 4,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 1000,
+                            "rotateY": 2000
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": isMobile ? 120 : 200,
+                        "color": "#00f7ff",
+                        "opacity": 0.5,
+                        "width": isMobile ? 2 : 3
+                    }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": { "enable": true, "mode": "grab" },
+                        "onclick": { "enable": false, "mode": "push" }
+                    },
+                    "modes": {
+                        "push": { "particles_nb": 5 },
+                        "remove": { "particles_nb": 5 }
+                    }
+                }
+            });
+
+            // Eliminar partículas extra generadas al hacer clic después de 12 segundos
+            setInterval(() => {
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.particles.array.splice(0, 5);
+                }
+            }, 12000);
+        });
+    </script>
+
+</body>
+</html>
