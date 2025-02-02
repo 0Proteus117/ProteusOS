@@ -114,8 +114,7 @@
 
             // Eliminar partículas extra generadas al hacer clic después de 12 segundos
             setInterval(() => {
-                if (window.pJSDom && window.pJSDom[0]) {
-                    window.pJSDom[0].pJS.particles.array.splice(0, 5);
+                if (window.pJSDom && window.pJSDom[0]) {             window.pJSDom[0].pJS.particles.array.splice(0, 5);
                 }
             }, 12000);
         });
