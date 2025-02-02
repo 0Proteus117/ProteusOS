@@ -1,22 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap');
+
 /* Estilos generales */
+
 body, html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     font-family: 'Orbitron', sans-serif;
-    background: #ffffffe5;
-    color: #ffffff;
+    background: #ffffff00;
+    color: #ffffff00;
     overflow: hidden;
+    
 }
 
-/* Contenedor del login */
+/* Restauración del contenedor del login */
 .login-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.549);
     padding: 40px;
     border-radius: 15px;
     text-align: center;
@@ -24,8 +28,53 @@ body, html {
     width: 350px;
     border: 3px solid #00f7ff;
     z-index: 1;
+    font-family: 'Orbitron', sans-serif;
 }
 
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #00f7ff;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-container input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #00f7ff;
+    background: transparent;
+    color: #00f7ff;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-container input::placeholder {
+    color: #FF0808;  /* Rojo complementario de #00f7ff */
+    opacity: 0.8; /* Ajusta la transparencia si lo quieres más tenue */
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #00f7ff;
+    border: none;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-container button:hover {
+    background: white;
+    color: #00f7ff;
+}
 /* Estilo del título */
 .title {
     font-size: 30px;
@@ -43,32 +92,41 @@ body, html {
 .hud-menu {
     position: fixed;
     top: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    left: 0;
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    height: auto;
+    background: rgba(0, 0, 0, 0.586);
     padding: 10px 0;
     text-align: center;
     box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
     z-index: 1000;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    justify-content: center; /* Centra el contenido */
+    align-items: center;
 }
 
 .hud-menu ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0 100px;
+    margin: 0 auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 20px;
     align-items: center;
     width: 100%;
-}    
+}
 
 .hud-menu ul li {
     flex-grow: 1;
     text-align: center;
 }
 
-.hud-menu ul li a {
+/* 🎯 Nuevo estilo para botones */
+.hud-menu ul li button {
+    background: none;
+    border: none;
     color: #00f7ff;
-    text-decoration: none;
     font-size: 16px;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
@@ -76,9 +134,11 @@ body, html {
     text-shadow: 0 0 5px rgba(0, 247, 255, 0.8);
     display: block;
     padding: 10px 0;
+    cursor: pointer; /* Hace que el cursor cambie a "mano" */
 }
 
-.hud-menu ul li a:hover {
+/* Efecto hover en botones */
+.hud-menu ul li button:hover {
     color: white;
     text-shadow: 0 0 10px rgba(0, 247, 255, 1);
 }
@@ -86,10 +146,10 @@ body, html {
 /* Estilos del submenú WiFi */
 .hud-submenu {
     position: absolute;
-    top: 50px;
+    top: 60px;
     left: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.533);
     text-align: center;
     display: none;
     padding: 10px 0;
@@ -98,6 +158,7 @@ body, html {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    font-family: 'Orbitron', sans-serif;
 }
 
 .hud-submenu.show {
@@ -144,57 +205,93 @@ body, html {
 /* Estilos del contenedor de la galería */
 @import "https://unpkg.com/open-props" layer(demo.system);
 
+/* Restauración del contenedor de la galería */
 #gallery-container {
-    display: none;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95vw; /* Ocupa casi toda la pantalla */
-    max-width: 1300px;
-    height: auto;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 247, 255, 0.6);
-    z-index: 1000;
+    display: inline-flex !important;  /* Hace que la caja se ajuste automáticamente */
+    flex-wrap: wrap;  /* Permite que las fichas ocupen solo el espacio necesario */
+    position: absolute !important;
+    top: 86% !important;
+    left: 50% !important;
+    justify-content: center;
+    align-items: center;
+    width: auto !important;  /* Se ajusta al contenido */
+    height: auto !important; /* Se ajusta a las fichas */
+    padding: 10px;
+    background: rgba(40, 40, 40, 0.556);
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* 🔥 Agregamos la transición */
+    z-index: 9;
 }
 
 fieldset {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: 50vh;
-    gap: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 1px;
     border: none;
-    width: 100%; /* Para que ocupe todo el contenedor */
-    transition: grid-template-columns 0.4s ease-in-out; /* Animación más rápida */
+    width: 10%;
+    transition: grid-template-columns 0.3s ease-in-out;
 }
 
-/* Ajuste para evitar que se compriman demasiado */
-fieldset label {
-    min-width: 100px;
-    background-position: center;
+.gallery-item {
+    position: relative;
+    width: 90px;
+    height: 90px;
     background-size: cover;
-    box-shadow: 0px 5px 10px rgba(0, 247, 255, 0.3);
-    cursor: pointer;
+    background-position: center;
     border-radius: 10px;
-    transition: transform 0.3s ease-in-out, background-size 0.5s ease-in-out;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    display: inline-block;
 }
 
-/* Nueva animación de expansión */
-fieldset label:hover {
-    transform: scale(1.25);
-    box-shadow: 0px 10px 15px rgba(0, 247, 255, 0.6);
-    background-size: auto 140%; /* Aumenta el tamaño de la imagen al hacer hover */
+/* Efecto estilo Dock macOS */
+.gallery:hover .gallery-item {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
 }
 
-/* Ajuste de tamaños cuando se selecciona una imagen */
-fieldset:has(label:nth-child(1) > input:checked) { grid-template-columns: 5fr 3fr; }
-fieldset:has(label:nth-child(2) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
-fieldset:has(label:nth-child(3) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
-fieldset:has(label:nth-child(4) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
-fieldset:has(label:nth-child(5) > input:checked) { grid-template-columns: 3fr 5fr; }
+.gallery-item:hover {
+    transform: translateY(-20px); /* 🔹 Sube 20px cuando haces hover */
+    z-index: 10;
+}
 
-label input {
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00f7ff9e;
+    color: #ff0808ce;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 🔹 Mueve el texto arriba */
+    align-items: center;
+    text-align: center;
     opacity: 0;
+    transition: opacity 0.75s ease-in-out;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 75%; /* 🔹 Reduce el tamaño del texto */
+    padding-top: 20px; /* 🔹 Ajusta la distancia desde arriba */
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+/* Reloj del modo stealth*/
+
+#clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #00f7ff;
+    font-family: "Orbitron", sans-serif;
 }
