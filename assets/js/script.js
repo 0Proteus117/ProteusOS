@@ -1,124 +1,124 @@
-// Evento de carga del DOM
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Inicializando sistema...");
 
-    // Verificar si es móvil
-    let isMobile = window.innerWidth <= 430;
-
-    // Configurar partículas
-    particlesJS("particles-js", {
-        "particles": {
-            "number": {
-                "value": isMobile ? 30 : 250,
-                "density": {
-                    "enable": true,
-                    "value_area": isMobile ? 600 : 1200
-                }
-            },
-            "color": { "value": "#0ff" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.8, "random": true },
-            "size": { "value": isMobile ? 2 : 3, "random": true },
-            "move": {
-                "enable": true,
-                "speed": isMobile ? 1 : 4,
-                "direction": "none",
-                "random": true,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": true
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": isMobile ? 90 : 200,
-                "color": "#00f7ff",
-                "opacity": 0.5,
-                "width": isMobile ? 1 : 3
-            }
-        },
-        "interactivity": {
-            "events": {
-                "onhover": { "enable": true, "mode": "grab" },
-                "onclick": { "enable": false, "mode": "push" }
-            }
-        },
-        "retina_detect": true
-    });
-
-    // 📌 Gestión del menú de WiFi y sus categorías
     const wifiButton = document.getElementById("wifi");
     const wifiCategories = document.getElementById("wifiCategories");
-    const categoryContainer = document.getElementById("category-container");
     const categoryButtons = document.querySelectorAll(".category-btn");
+    const galleryContainer = document.getElementById("gallery-container");
+    const gallery = document.getElementById("gallery");
+    const loginForm = document.querySelector(".login-form");
+    const loginPage = document.getElementById("loginPage");
+    const mainUI = document.getElementById("mainUI");
 
-    // Datos de botones según categoría
-    const buttonData = {
+    // 🔹 Asegurar que la galería y el submenú estén ocultos al inicio
+    wifiCategories.style.display = "none";
+    galleryContainer.style.display = "none";
+
+    // ✅ Restaurar validación de credenciales (LOGIN)
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+
+            if (username === "admin" && password === "admin1991") {
+                console.log("Acceso concedido");
+                loginPage.style.display = "none";
+                mainUI.style.display = "block";
+            } else {
+                alert("Acceso denegado. Verifique sus credenciales.");
+            }
+        });
+    }
+
+    // 🔥 Datos de la galería por categoría
+    const galleryData = {
         diplomacy: [
-            "Escanear Redes",
-            "Conectar a WiFi",
-            "Administrar Redes",
-            "Cambiar MAC",
-            "Bloquear Dispositivo",
-            "Crear Hotspot"
+            { title: "Escanear Redes", img: "https://assets.codepen.io/2585/fiddle-leaf.jpeg" },
+            { title: "Conectar a WiFi", img: "https://assets.codepen.io/2585/pink-princess.jpeg" },
+            { title: "Administrar Redes", img: "https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg" },
+            { title: "Cambiar MAC", img: "https://assets.codepen.io/2585/pothos.jpeg" },
+            { title: "Bloquear Dispositivo", img: "https://assets.codepen.io/2585/rubber-tree.webp" },
+            { title: "Crear Hotspot", img: "https://assets.codepen.io/2585/fiddle-leaf.jpeg" }
         ],
         recon: [
-            "Monitorear Tráfico",
-            "Escanear Dispositivos",
-            "Probar Seguridad WiFi",
-            "Detectar Vulnerabilidades",
-            "Análisis de Puertos"
+            { title: "Monitorear Tráfico", img: "https://assets.codepen.io/2585/pink-princess.jpeg" },
+            { title: "Escanear Dispositivos", img: "https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg" },
+            { title: "Probar Seguridad WiFi", img: "https://assets.codepen.io/2585/pothos.jpeg" },
+            { title: "Detectar Vulnerabilidades", img: "https://assets.codepen.io/2585/rubber-tree.webp" },
+            { title: "Análisis de Puertos", img: "https://assets.codepen.io/2585/fiddle-leaf.jpeg" }
         ],
         infiltration: [
-            "Deauth (Expulsar Usuarios)",
-            "Crear Fake WiFi",
-            "Ataque WPS",
-            "Jammer (Interferencia WiFi)",
-            "Interceptar Paquetes",
-            "Clonar MAC de Dispositivo"
+            { title: "Deauth (Expulsar Usuarios)", img: "https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg" },
+            { title: "Crear Fake WiFi", img: "https://assets.codepen.io/2585/pothos.jpeg" },
+            { title: "Ataque WPS", img: "https://assets.codepen.io/2585/rubber-tree.webp" },
+            { title: "Jammer (Interferencia WiFi)", img: "https://assets.codepen.io/2585/fiddle-leaf.jpeg" },
+            { title: "Interceptar Paquetes", img: "https://assets.codepen.io/2585/pink-princess.jpeg" },
+            { title: "Clonar MAC de Dispositivo", img: "https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg" }
         ]
     };
 
-    if (wifiButton && wifiCategories) {
-        wifiButton.addEventListener("click", function (event) {
-            event.preventDefault();
-            console.log("Clic en WiFi detectado"); // Verificar si el evento se activa
-            wifiCategories.classList.toggle("show");
-        });
-    } else {
-        console.error("Error: No se encontró el botón WiFi o el submenú.");
-    }
+    // 🎯 Evento para mostrar/ocultar el submenú WiFi
+    wifiButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("Clic en WiFi detectado");
 
-    // Mostrar botones de acciones según categoría
+        if (wifiCategories.classList.contains("show")) {
+            wifiCategories.classList.remove("show");
+            setTimeout(() => {
+                wifiCategories.style.display = "none";
+            }, 300);
+        } else {
+            wifiCategories.style.display = "flex";
+            setTimeout(() => {
+                wifiCategories.classList.add("show");
+            }, 10);
+        }
+
+        // Ocultar la galería cuando se abre el submenú WiFi
+        galleryContainer.style.display = "none";
+    });
+
+    // 🎯 Evento para mostrar la galería al hacer clic en una opción del submenú
     categoryButtons.forEach(button => {
         button.addEventListener("click", function () {
             const category = this.getAttribute("data-category");
-            showCategoryButtons(category);
+            console.log(`✅ Clic detectado en: ${category}`);
+    
+            // Limpiar la galería antes de agregar nuevas imágenes
+            gallery.innerHTML = "";
+    
+            // Verificar si la categoría existe
+            if (!galleryData[category]) {
+                console.error("❌ Categoría no encontrada:", category);
+                return;
+            }
+    
+            // Crear el fieldset para la nueva galería
+            const fieldset = document.createElement("fieldset");
+    
+            galleryData[category].forEach(item => {
+                const label = document.createElement("label");
+                label.style.backgroundImage = `url(${item.img})`;
+    
+                // Agregar el efecto de expansión al seleccionar
+                label.innerHTML = `<input type="radio" name="images" value="${item.title}">`;
+                fieldset.appendChild(label);
+            });
+    
+            // Agregar el fieldset a la galería
+            gallery.appendChild(fieldset);
+    
+            // 🔥 Ajustar la posición y tamaño de la galería
+            galleryContainer.style.display = "block";
+            galleryContainer.style.top = "20%";
+            galleryContainer.style.left = "50%";
+            galleryContainer.style.width = "90vw"; 
+            galleryContainer.style.maxWidth = "1200px";
+            galleryContainer.style.transform = "translateX(-50%)";
+            setTimeout(() => {
+                galleryContainer.style.opacity = "1";
+            }, 100);
         });
-    });
-
-    function showCategoryButtons(category) {
-        categoryContainer.innerHTML = "";
-        categoryContainer.classList.remove("hidden");
-
-        buttonData[category].forEach(text => {
-            const btn = document.createElement("button");
-            btn.classList.add("function-btn");
-            btn.textContent = text;
-            categoryContainer.appendChild(btn);
-        });
-    }
-
-    // 📌 Validación de credenciales
-    document.querySelector(".login-form").addEventListener("submit", function (event) {
-        event.preventDefault();
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-
-        if (username === "admin" && password === "admin1991") {
-            document.getElementById("loginPage").style.display = "none";
-            document.getElementById("mainUI").style.display = "block";
-        } else {
-            alert("Acceso denegado. Verifique sus credenciales.");
-        }
     });
 });

@@ -27,31 +27,38 @@
         </form>
     </div>
 
-<!-- Menú Principal -->
-<div id="mainUI" style="display: none;">
-    <nav class="hud-menu">
-        <ul>
-            <li><a href="#" id="wifi">WiFi</a></li>
-            <li><a href="#" id="bluetooth">Bluetooth</a></li>
-            <li><a href="#" id="usb">USB</a></li>
-            <li><a href="#" id="security">Seguridad</a></li>
-            <li><a href="#" id="settings">Ajustes</a></li>
-            <li><a href="#" id="stealth">Stealth</a></li>
-        </ul>
-    </nav>
+    <!-- Menú Principal -->
+    <div id="mainUI" style="display: none;">
+        <nav class="hud-menu">
+            <ul>
+                <li><a href="#" id="wifi">WiFi</a></li>
+                <li><a href="#" id="bluetooth">Bluetooth</a></li>
+                <li><a href="#" id="usb">USB</a></li>
+                <li><a href="#" id="security">Seguridad</a></li>
+                <li><a href="#" id="settings">Ajustes</a></li>
+                <li><a href="#" id="stealth">Stealth</a></li>
+            </ul>
+        </nav>
 
-    <!-- Submenú de categorías de WiFi -->
-    <nav class="hud-submenu hidden" id="wifiCategories">
-        <ul>
-            <li><button class="category-btn" data-category="diplomacy">DIPLOMACIA</button></li>
-            <li><button class="category-btn" data-category="recon">RECONOCIMIENTO</button></li>
-            <li><button class="category-btn" data-category="infiltration">INFILTRACIÓN</button></li>
-        </ul>
-    </nav>
+        <!-- Submenú de categorías de WiFi -->
+        <nav class="hud-submenu" id="wifiCategories">
+            <ul>
+                <li><button class="category-btn" data-category="diplomacy">DIPLOMACIA</button></li>
+                <li><button class="category-btn" data-category="recon">RECONOCIMIENTO</button></li>
+                <li><button class="category-btn" data-category="infiltration">INFILTRACIÓN</button></li>
+            </ul>
+        </nav>
 
-    <!-- Contenedor donde aparecerán los botones de las acciones -->
-    <div id="category-container" class="hidden"></div>
-</div>
+        <!-- Contenedor donde aparecerán los botones de las acciones -->
+        <div id="category-container" class="hidden"></div>
+        
+        <!-- Contenedor donde se mostrará la galería dinámica -->
+        <div id="gallery-container">
+            <fieldset id="gallery">
+                <!-- Las imágenes se insertarán aquí dinámicamente -->
+            </fieldset>
+        </div>
+    </div>
 
     <!-- Scripts para partículas y funcionalidad -->
     <script src="https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.min.js"></script>

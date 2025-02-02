@@ -23,6 +23,7 @@ body, html {
     box-shadow: 0px 0px 25px rgba(0, 247, 255, 0.8);
     width: 350px;
     border: 3px solid #00f7ff;
+    z-index: 1;
 }
 
 /* Estilo del título */
@@ -38,53 +39,7 @@ body, html {
     text-shadow: 0px 0px 10px rgba(0, 247, 255, 0.8);
 }
 
-/* Inputs */
-.input-container input {
-    width: 85%;
-    padding: 10px;
-    height: 40px;
-    margin-top: 10px;
-    border-radius: 8px;
-    border: 2px solid rgba(0, 247, 255, 0.3);
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    transition: all 0.4s ease-in-out;
-    box-shadow: 0px 0px 8px rgba(0, 247, 255, 0.5);
-}
-
-/* Iluminación al escribir */
-.input-container input:focus {
-    border: 2px solid #00f7ff;
-    box-shadow: 0px 0px 15px rgba(0, 247, 255, 1);
-    background: rgba(0, 247, 255, 0.3);
-}
-
-/* Botón */
-.login-btn {
-    width: 85%;
-    height: 40px;
-    padding: 10px;
-    border-radius: 8px;
-    background: linear-gradient(45deg, #00bcd4, #0088cc);
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 0px 10px rgba(0, 247, 255, 0.5);
-}
-
-/* Botón hover */
-.login-btn:hover {
-    background: linear-gradient(45deg, #0088cc, #00bcd4);
-    box-shadow: 0px 0px 15px rgba(0, 247, 255, 0.8);
-}
-
-/* Estilos del menú HUD principal */
+/* Estilos del menú principal */
 .hud-menu {
     position: fixed;
     top: 0;
@@ -96,10 +51,42 @@ body, html {
     z-index: 1000;
 }
 
-/* Estilos del submenú de categorías de WiFi */
+.hud-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}    
+
+.hud-menu ul li {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.hud-menu ul li a {
+    color: #00f7ff;
+    text-decoration: none;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-family: 'Orbitron', sans-serif;
+    transition: color 0.3s ease-in-out;
+    text-shadow: 0 0 5px rgba(0, 247, 255, 0.8);
+    display: block;
+    padding: 10px 0;
+}
+
+.hud-menu ul li a:hover {
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 1);
+}
+
+/* Estilos del submenú WiFi */
 .hud-submenu {
     position: absolute;
-    top: 40px; /* Justo debajo del menú principal */
+    top: 50px;
     left: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.9);
@@ -108,56 +95,32 @@ body, html {
     padding: 10px 0;
     box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
     z-index: 999;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
 .hud-submenu.show {
     display: flex;
+    opacity: 1;
+    transform: translateY(0);
     justify-content: center;
-    gap: 15px;
-    transition: all 0.3s ease-in-out;
 }
 
-.hud-menu ul {
+.hud-submenu ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.hud-menu ul li {
+.hud-submenu ul li {
     margin: 0 15px;
 }
 
-.hud-menu ul li a {
-    color: #00f7ff;
-    text-decoration: none;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-/* Submenú de WiFi justo debajo del menú principal */
-.hud-submenu {
-    position: absolute;
-    top: 40px; /* Justo debajo del menú principal */
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    text-align: center;
-    display: none;
-    padding: 10px 0;
-    box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
-    z-index: 999;
-}
-
-/* Mostrar cuando es activado */
-.hud-submenu.show {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Botón de categoría en el submenú */
+/* Botones del submenú */
 .category-btn {
     background: rgba(0, 0, 0, 0.8);
     color: #00f7ff;
@@ -178,62 +141,60 @@ body, html {
     box-shadow: 0 0 20px rgba(0, 247, 255, 0.8);
 }
 
-/* Contenedor de las categorías */
-#wifiCategories, #category-container {
-    text-align: center;
-    margin-top: 10px;
-}
+/* Estilos del contenedor de la galería */
+@import "https://unpkg.com/open-props" layer(demo.system);
 
-/* Ocultar elementos hasta que se activen */
-.hidden {
+#gallery-container {
     display: none;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95vw; /* Ocupa casi toda la pantalla */
+    max-width: 1300px;
+    height: auto;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 247, 255, 0.6);
+    z-index: 1000;
 }
 
-/* Botones de funciones dentro de cada categoría */
-.function-btn {
-    background: rgba(0, 0, 0, 0.9);
-    color: #00f7ff;
-    font-size: 14px;
-    padding: 10px;
-    border: 2px solid #00f7ff;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-family: 'Orbitron', sans-serif;
+fieldset {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 50vh;
+    gap: 10px;
+    border: none;
+    width: 100%; /* Para que ocupe todo el contenedor */
+    transition: grid-template-columns 0.4s ease-in-out; /* Animación más rápida */
+}
+
+/* Ajuste para evitar que se compriman demasiado */
+fieldset label {
+    min-width: 100px;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0px 5px 10px rgba(0, 247, 255, 0.3);
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin: 5px;
-    display: block;
-    width: 80%;
-    text-align: center;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, background-size 0.5s ease-in-out;
 }
 
-.function-btn:hover {
-    background: #00f7ff;
-    color: black;
-    box-shadow: 0 0 20px rgba(0, 247, 255, 0.8);
+/* Nueva animación de expansión */
+fieldset label:hover {
+    transform: scale(1.25);
+    box-shadow: 0px 10px 15px rgba(0, 247, 255, 0.6);
+    background-size: auto 140%; /* Aumenta el tamaño de la imagen al hacer hover */
 }
 
-/* Contenedor de las categorías */
-#wifiCategories, #category-container {
-    text-align: center;
-    margin-top: 15px;
-}
+/* Ajuste de tamaños cuando se selecciona una imagen */
+fieldset:has(label:nth-child(1) > input:checked) { grid-template-columns: 5fr 3fr; }
+fieldset:has(label:nth-child(2) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
+fieldset:has(label:nth-child(3) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
+fieldset:has(label:nth-child(4) > input:checked) { grid-template-columns: 2fr 5fr 2fr; }
+fieldset:has(label:nth-child(5) > input:checked) { grid-template-columns: 3fr 5fr; }
 
-/* Ocultar elementos hasta que se activen */
-.hidden {
-    display: none;
-}
-
-/* Subrayado animado en hover */
-.hud-menu ul li a::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #00f7ff;
-    transition: width 0.3s ease-in-out;
-}
-
-.hud-menu ul li a:hover::after {
-    width: 100%;
+label input {
+    opacity: 0;
 }
