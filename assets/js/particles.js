@@ -1,4 +1,35 @@
-let isMobile = window.innerWidth <= 430;
+function resizeCanvas() {
+    let isPortrait = window.innerHeight > window.innerWidth; // Detecta si el móvil está en vertical
+    let isIphone = /iPhone|iPad|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    const canvas = document.getElementById("particlesCanvas");
+    if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Si es un iPhone y está en modo vertical, aseguramos el ajuste correcto
+        if (isIphone && isPortrait) {
+            canvas.style.width = "100vw";
+            canvas.style.height = "100vh";
+        }
+    }
+}
+
+function adjustParticleFilter() {
+    if (window.innerWidth <= 430) {
+        document.getElementById("particles-js").style.filter = "brightness(0.6) contrast(1.2)";
+    } else {
+        document.getElementById("particles-js").style.filter = "brightness(1) contrast(1)";
+    }
+}
+
+// Ejecutar al cargar y cuando la pantalla cambie de tamaño
+adjustParticleFilter();
+window.addEventListener("resize", adjustParticleFilter);
+
+// Ejecutar la función en la carga de la página y en cambios de tamaño
+window.addEventListener("resize", resizeCanvas);
+window.addEventListener("DOMContentLoaded", resizeCanvas);
 
 particlesJS("particles-js", {
         
@@ -10,12 +41,12 @@ particlesJS("particles-js", {
                 value: isMobile ? 2000 : 300,  // Multiplicamos por 50 en móviles
                 density: { 
                     enable: true, 
-                    value_area: isMobile ? 1000 : 1600 
+                    "value_area": isIphone && isPortrait ? 1400 : isMobile ? 800 : 1200 
                 }
             },
 
             color: { 
-                value: "#00f7ff" 
+                value: isMobile ?"rgb(78, 245, 251)" : "#00f7ff",
             },
 
             shape: { 
@@ -36,7 +67,7 @@ particlesJS("particles-js", {
                 enable: true,
                 distance: isMobile ? 120 : 200,
                 color: "#00f7ff",
-                opacity: 0.5,
+                opacity: 1,
                 width: isMobile ? 2 : 3
             },
             

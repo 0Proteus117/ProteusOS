@@ -73,18 +73,22 @@
 
             particlesJS("particles-js", {
                 "particles": {
-                    "number": { "value": isMobile ? 50 : 250, "density": { "enable": true, "value_area": isMobile ? 800 : 1200 } },
+                    "number": { "value": isMobile ? 250 : 300, 
+                    "density": { 
+                        "enable": true, 
+                        "value_area": isMobile ? 400 : 1000 } },
+                        
                     "color": { "value": [ "#00f7ff", "#ffffff"] },
                     "shape": { "type": "circle" },
                     "opacity": { "value": 0.8, "random": true },
                     "size": { "value": isMobile ? 3 : 4, "random": true },
                     "move": {
                         "enable": true,
-                        "speed": isMobile ? 2 : 4,
+                        "speed": isMobile ? 1.75 : 3,
                         "direction": "none",
                         "random": true,
                         "straight": false,
-                        "out_mode": "out",
+                        "out_mode": "bounce",
                         "bounce": false,
                         "attract": {
                             "enable": true,
@@ -97,13 +101,13 @@
                         "distance": isMobile ? 120 : 200,
                         "color": "#00f7ff",
                         "opacity": 0.5,
-                        "width": isMobile ? 2 : 3
+                        "width": isMobile ? 2.2 : 3
                     }
                 },
                 "interactivity": {
                     "events": {
                         "onhover": { "enable": true, "mode": "grab" },
-                        "onclick": { "enable": false, "mode": "push" }
+                        "onclick": { "enable": false, "mode": "grab" },
                     },
                     "modes": {
                         "push": { "particles_nb": 5 },

@@ -14,6 +14,14 @@ body, html {
     
 }
 
+#particles-js {
+    position: fixed;
+    width: 100vw;
+    height: 100vh; /* Ocupa toda la pantalla */
+    top: 0;
+    left: 0;
+}
+
 /* Restauración del contenedor del login */
 .login-container {
     position: absolute;
@@ -87,6 +95,7 @@ body, html {
     padding-bottom: 10px;
     text-shadow: 0px 0px 10px rgba(0, 247, 255, 0.8);
 }
+    
 
 /* Estilos del menú principal */
 .hud-menu {
@@ -119,7 +128,7 @@ body, html {
 
 .hud-menu ul li {
     flex-grow: 1;
-    text-align: center;
+    text-align: left;
 }
 
 /* 🎯 Nuevo estilo para botones */
@@ -142,6 +151,7 @@ body, html {
     color: white;
     text-shadow: 0 0 10px rgba(0, 247, 255, 1);
 }
+ 
 
 /* Estilos del submenú WiFi */
 .hud-submenu {
@@ -196,6 +206,8 @@ body, html {
     box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
 }
 
+
+
 .category-btn:hover {
     background: #00f7ff;
     color: black;
@@ -246,7 +258,12 @@ fieldset {
 }
 
 /* Efecto estilo Dock macOS */
-.gallery:hover .gallery-item {
+.gallery:hover {
+    transform: scale(1.3);
+}
+
+
+.gallery-item {
     transform: scale(1.1);
     transition: transform 0.2s ease-in-out;
 }
@@ -294,4 +311,156 @@ fieldset {
     font-size: 48px;
     color: #00f7ff;
     font-family: "Orbitron", sans-serif;
+}
+
+
+@media (max-width: 430px) {
+    #particles-js {
+        position: fixed;
+        width: 100vw;
+        height: 100vh; /* Ocupa toda la pantalla */
+        top: 0;
+        left: 0;
+    }   
+    .login-container {
+        width: 50%;
+        height: 25%;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+    }
+
+    .login-container h2 {
+        font-size: 20px;
+    }
+
+    .login-container input {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #00f7ff;
+        background: transparent;
+        color: #00f7ff;
+        text-align: center;
+        font-size: 13px;
+        border-radius: 5px;
+        top: 10%;
+        left: 0%;
+        position:block;
+    }
+
+    .title {
+        font-size: 16px;
+        position: relative;
+        top: -13%;
+        left: 0%;
+    }
+
+    .hud-menu {
+        padding: 1px 0;
+        width: 100vw;
+    }
+
+    .hud-menu ul {
+        width: 100vw;
+    }
+    .hud-menu ul li button {
+        font-size: 9px;
+        justify-content: space-evenly;
+    }
+
+    .hud-menu ul li button:hover {
+        font-size: 9px;
+        left: 50%;
+    }
+    
+    .hud-submenu {
+        width: 100vw;
+        height: 2.75%;
+        top: 5.15%;
+        left: 0%;
+    }
+
+    .hud-submenu.show {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        justify-content: center;
+    }
+
+    .hud-submenu ul {
+        width: 100vw;
+        background: transparent;
+        color: #00f7ff;
+        text-align: center;
+        font-size: 12px;
+        border-radius: 5px;
+        top: -20%;
+        left: 0%;
+        position:relative;
+
+    }
+    
+    .hud-submenu ul li{
+        width: 100vw;
+        text-align: center;
+        font-size: 13px;
+        border-radius: 5px;
+    }
+    .gallery-container {
+        width: 100vw;
+        height: 100%;
+        padding: 15px;
+        background: rgba(40, 40, 40, 0.556);
+        border-radius: 15px;
+        box-shadow: 0px 0px 20px rgba(0, 255, 255, 0.3);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        z-index: 9;
+    }
+    .fieldset {
+        display: flex;
+        justify-content: center;
+        gap: 1px;
+        border: none;
+        width: 20%;
+        transition: grid-template-columns 0.4s ease-in-out;
+    }
+
+    .category-btn {
+        height: 27px;
+        width: 112%;
+        padding: 1px;
+        margin-bottom: px;
+        text-align: center;
+        font-size: 9px;
+        border-radius: 5px;
+        top: 10%;
+        left: 0%;
+        position:block;
+    }
+
+    .category-btn:hover {
+        font-size: 10px;
+    }
+
+    .gallery-item {
+        width: 100%;
+        height: 230%;
+        padding: 23px;
+        margin-bottom: 1px;
+        text-align: center;
+        font-size: 10px;
+        border-radius: 5px;
+        top: -120%;
+        left: 0%;
+        position:relative;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-30px);
+    }
+
+    .gallery:hover .gallery-item {
+        transform: scale(1.3);
+    }
 }
