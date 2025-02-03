@@ -78,13 +78,13 @@
                         "enable": true, 
                         "value_area": isMobile ? 400 : 1000 } },
                         
-                    "color": { "value": [ "#00f7ff", "#ffffff"] },
+                    "color": { "value": [ "#00f7ff",] },
                     "shape": { "type": "circle" },
                     "opacity": { "value": 0.8, "random": true },
                     "size": { "value": isMobile ? 3 : 4, "random": true },
                     "move": {
                         "enable": true,
-                        "speed": isMobile ? 1.75 : 3,
+                        "speed": isMobile ? 1.6 : 3,
                         "direction": "none",
                         "random": true,
                         "straight": false,
@@ -107,7 +107,7 @@
                 "interactivity": {
                     "events": {
                         "onhover": { "enable": true, "mode": "grab" },
-                        "onclick": { "enable": false, "mode": "grab" },
+                        "onclick": { "enable": false, "mode": "repulse" },
                     },
                     "modes": {
                         "push": { "particles_nb": 5 },
@@ -120,9 +120,11 @@
             setInterval(() => {
                 if (window.pJSDom && window.pJSDom[0]) {             window.pJSDom[0].pJS.particles.array.splice(0, 5);
                 }
-            }, 12000);
+            }, 3000);
         });
     </script>
+
+<div id="clock" class="clock"></div>
 
 </body>
 </html>

@@ -114,12 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function startClock() {
         const clock = document.createElement("div");
         clock.id = "clock";
+        clock.className = "clock";
         clock.style.position = "absolute";
         clock.style.top = "50%";
         clock.style.left = "50%";
         clock.style.transform = "translate(-50%, -50%)";
-        clock.style.fontSize = "48px";
-        clock.style.color = "#00f7ff";
+        clock.style.color = "rgba(23, 26, 26, 0.75)";
         clock.style.fontFamily = "Orbitron, sans-serif";
         document.body.appendChild(clock);
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (stealthMode) {
             console.log("🔹 Modo Stealth ACTIVADO");
-            document.body.style.background = "black";
+            document.body.style.background = "white";
 
             document.querySelectorAll("#menu, #gallery-container, .login-container").forEach(el => {
                 el.style.display = "none";

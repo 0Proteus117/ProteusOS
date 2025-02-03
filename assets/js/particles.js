@@ -46,7 +46,7 @@ particlesJS("particles-js", {
             },
 
             color: { 
-                value: isMobile ?"rgb(78, 245, 251)" : "#00f7ff",
+                value: "#00f7ff",
             },
 
             shape: { 
@@ -108,8 +108,8 @@ particlesJS("particles-js", {
                 },  // Aumentamos la distancia de agarre
 
                 repulse: { 
-                    distance: 250, 
-                    duration: 0.8 
+                    distance: 50, 
+                    duration: 1.2 
                 },  // Ahora repelerá con más fuerza
                 
                 push: { 
