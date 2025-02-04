@@ -1,4 +1,5 @@
 {
   "livePreview.customExternalBrowser": "Chrome",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "livePreview.defaultPreviewPath": "/index.html"
 }

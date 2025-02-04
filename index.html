@@ -61,7 +61,7 @@
     </div>
 
     <!-- Scripts para partículas y funcionalidad -->
-    <script src="https://cdn.jsdelivr.net/gh/VincentGarreau/particles.js/particles.min.js"></script>
+    <script src="assets/js/particles.min.js"></script>
     <script src="assets/js/particles.js"></script> <!-- Cargar configuración de partículas -->
     <script src="assets/js/script.js"></script>
 
@@ -73,15 +73,37 @@
 
             particlesJS("particles-js", {
                 "particles": {
-                    "number": { "value": isMobile ? 250 : 300, 
+                    "number": { 
+                        "value": isMobile ? 300 : 150 
+                    
+                    },
+                        
                     "density": { 
                         "enable": true, 
-                        "value_area": isMobile ? 400 : 1000 } },
+                        "value_area": isMobile ? 400 : 150 
+                    
+                    },
                         
-                    "color": { "value": [ "#00f7ff",] },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.8, "random": true },
-                    "size": { "value": isMobile ? 3 : 4, "random": true },
+                    "color": { 
+                        "value": [ "#00f7ff",] 
+                    
+                    },
+
+                    "shape": { 
+                        "type": "circle" 
+                    
+                    },
+
+                    "opacity": { 
+                        "value": 0.8, 
+                        "random": true 
+                    },
+
+                    "size": { 
+                        "value": isMobile ? 3 : 4, 
+                        "random": true
+                    },
+
                     "move": {
                         "enable": true,
                         "speed": isMobile ? 1.6 : 3,
@@ -90,40 +112,38 @@
                         "straight": false,
                         "out_mode": "bounce",
                         "bounce": false,
-                        "attract": {
-                            "enable": true,
-                            "rotateX": 1000,
-                            "rotateY": 2000
-                        }
+                        
                     },
+
                     "line_linked": {
                         "enable": true,
                         "distance": isMobile ? 120 : 200,
                         "color": "#00f7ff",
                         "opacity": 0.5,
                         "width": isMobile ? 2.2 : 3
-                    }
-                },
-                "interactivity": {
-                    "events": {
-                        "onhover": { "enable": true, "mode": "grab" },
-                        "onclick": { "enable": false, "mode": "repulse" },
                     },
-                    "modes": {
-                        "push": { "particles_nb": 5 },
-                        "remove": { "particles_nb": 5 }
-                    }
-                }
-            });
 
-            // Eliminar partículas extra generadas al hacer clic después de 12 segundos
-            setInterval(() => {
-                if (window.pJSDom && window.pJSDom[0]) {             window.pJSDom[0].pJS.particles.array.splice(0, 5);
-                }
-            }, 3000);
+                    "interactivity": {
+                        "events": {
+                            "onhover": { "enable": true, "mode": "grab" },
+                            "onclick": { "enable": false, "mode": "grab" },
+                                
+                        },
+                        "modes": {
+                            "push": { "particles_nb": 0 },
+                            "remove": { "particles_nb": 0 },
+                            "repulse": { "distance": 60, "duration": 0.4 }, 
+                            "grab": { "distance": 50, "line_linked": { "opacity": 1 } }
+                        },
+                    },
+                },
+                "retina_detect": true}
+            );
         });
-    </script>
+    
+    </script>            
 
+</script>
 <div id="clock" class="clock"></div>
 
 </body>

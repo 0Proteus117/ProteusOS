@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("Acceso concedido");
                 loginPage.style.display = "none";
                 mainUI.style.display = "block";
-            } else {
-                alert("Acceso denegado. Verifique sus credenciales.");
             }
         });
     }
@@ -100,6 +98,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 galleryContainer.style.opacity = "1";
             }, 100);
         });
+    });
+
+    document.addEventListener("click", function (event) {
+        // ⏳ Delay para evitar el conflicto con el clic en el botón WiFi
+        setTimeout(() => {
+            const isClickInsideSubmenu = wifiCategories.contains(event.target);
+            const isClickInsideButton = event.target.closest(".category-btn") !== null; // Verifica si el clic fue en un botón dentro del submenú
+            const isClickInsideGallery = galleryContainer.contains(event.target);
+            const isClickOnWifiButton = wifiButton.contains(event.target);
+    
+            console.log("🔍 Detectando clic...");
+            console.log("➡️ Dentro del submenú:", isClickInsideSubmenu);
+            console.log("➡️ Dentro de un botón del submenú:", isClickInsideButton);
+            console.log("➡️ Dentro de la galería:", isClickInsideGallery);
+            console.log("➡️ Dentro del botón WiFi:", isClickOnWifiButton);
+    
+            // Si el clic NO fue dentro del submenú, botones, galería o el botón WiFi, ocultamos
+            if (!isClickInsideSubmenu && !isClickInsideButton && !isClickInsideGallery && !isClickOnWifiButton) {
+                console.log("📌 Clic fuera del HUD Submenu y Galería, ocultándolos...");
+                wifiCategories.classList.remove("show");
+                wifiCategories.classList.add("hidden"); // Oculta el submenú
+                galleryContainer.classList.add("hidden"); // Oculta la galería
+            }
+        }, 100); // ⏳ Delay de 100ms para evitar conflictos
     });
 
     // Evento para cerrar la galería si se hace clic fuera de ella

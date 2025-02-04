@@ -20,12 +20,13 @@ body, html {
     height: 100vh; /* Ocupa toda la pantalla */
     top: 0;
     left: 0;
+    
 }
 
 /* Restauración del contenedor del login */
 .login-container {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.549);
@@ -153,7 +154,7 @@ body, html {
 }
  
 
-/* Estilos del submenú WiFi */
+/* Estado inicial del submenú */
 .hud-submenu {
     position: absolute;
     top: 60px;
@@ -161,21 +162,39 @@ body, html {
     width: 100%;
     background: rgba(0, 0, 0, 0.533);
     text-align: center;
-    display: none;
     padding: 10px 0;
     box-shadow: 0px 2px 10px rgba(0, 247, 255, 0.8);
     z-index: 999;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
     font-family: 'Orbitron', sans-serif;
+    pointer-events: none; /* Bloquea clics cuando está oculto */
 }
 
+/* 🎭 Clase para mostrar el submenú con animación */
 .hud-submenu.show {
     display: flex;
     opacity: 1;
     transform: translateY(0);
+    visibility: visible;
     justify-content: center;
+    pointer-events: auto; /* Habilita clics cuando está visible */
+}
+
+/* 🎭 Clase de salida para que desaparezca suavemente */
+.hud-submenu.fade-out {
+    opacity: 0; /* Hace que desaparezca */
+    transform: translateY(-10px);
+    visibility: hidden; /* Oculta el contenido */
+}
+
+/* 🎭 Clase de entrada para que aparezca suavemente */
+.hud-submenu.fade-in {
+    opacity: 1; /* Hace que aparezca */
+    transform: translateY(0);
+    visibility: visible; /* Muestra el contenido */
 }
 
 .hud-submenu ul {
@@ -308,6 +327,70 @@ fieldset {
 }
 
 
+
+
+
+
+@media screen and (max-height: 430px) and (orientation: landscape) {
+    .login-container {
+        width: 70vw;  /* Más ancho en landscape */
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        font-size: 14px;
+        display: flex;
+        flex-direction: row; /* Alinear contenido en fila */
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .login-container input {
+        width: 100%;
+        height: 20px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid #00f7ff;
+        background: transparent;
+        color: #00f7ff;
+        text-align: center;
+        font-size: 13px;
+        border-radius: 5px;
+        top: 10%;
+        left: 0%;
+        position:block;
+    }
+    
+
+    .login-container h2 {
+        font-size: 20px;
+    }
+
+
+    .title {
+        font-size: 16px;
+        position: relative;
+        top: -13%;
+        left: 0%;
+    }
+
+    .clock {
+        position: block;
+        font-size: 180px;
+        top: 50%;
+        left: 50%;
+        color: #000000;
+        font-family: "Orbitron", sans-serif;
+    }
+
+}
+
+
+
+
+
+
 @media only screen and (max-width: 768px), 
        only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) {
     
@@ -385,13 +468,22 @@ fieldset {
         height: 2.75%;
         top: 5.15%;
         left: 0%;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-
+    
     .hud-submenu.show {
         display: flex;
         opacity: 1;
         transform: translateY(0);
         justify-content: center;
+    }
+    
+    /* Agrega una animación de salida */
+    .hud-submenu.fade-out {
+        opacity: 0;
+        transform: translateY(-10px);
     }
 
     .hud-submenu ul {
@@ -470,3 +562,4 @@ fieldset {
         transform: scale(1.3);
     }
 }
+
