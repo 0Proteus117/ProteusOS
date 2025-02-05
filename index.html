@@ -14,7 +14,7 @@
 
     <!-- Caja de login asegurando visibilidad sobre el fondo -->
     <div class="login-container" id="loginPage">
-        <h1 class="title">PROTOCOLO DE AUTORIZACIÓN</h1>
+        <h1 class="title">Mjölnir<br>Network</h1>
         
         <form class="login-form">
             <div class="input-container">
@@ -37,6 +37,14 @@
                 <li><button id="security">Seguridad</button></li>
                 <li><button id="settings">Ajustes</button></li>
                 <li><button id="stealth">Stealth</button></li>
+
+                <!-- 🌙 NUEVO: Switch para Dark Mode -->
+                <li>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </li>
             </ul>
         </nav>
 
@@ -74,13 +82,13 @@
             particlesJS("particles-js", {
                 "particles": {
                     "number": { 
-                        "value": isMobile ? 300 : 150 
+                        "value": isMobile ? 300 : 200 
                     
                     },
                         
                     "density": { 
                         "enable": true, 
-                        "value_area": isMobile ? 400 : 150 
+                        "value_area": isMobile ? 400 : 1100 
                     
                     },
                         
@@ -117,9 +125,9 @@
 
                     "line_linked": {
                         "enable": true,
-                        "distance": isMobile ? 120 : 200,
+                        "distance": isMobile ? 120 : 170,
                         "color": "#00f7ff",
-                        "opacity": 0.5,
+                        "opacity": 0.75,
                         "width": isMobile ? 2.2 : 3
                     },
 

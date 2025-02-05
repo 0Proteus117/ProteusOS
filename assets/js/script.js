@@ -12,7 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginPage = document.getElementById("loginPage");
     const mainUI = document.getElementById("mainUI");
     const usernameField = document.getElementById("username");
+    const darkModeToggle = document.getElementById("darkModeToggle");
 
+    let darkMode = false;
     let stealthMode = false;
     let clickCount = 0;
     let clickTimer;
@@ -255,6 +257,26 @@ document.addEventListener("DOMContentLoaded", function () {
             clearTimeout(inactivityTimer);
         }
     });
+
+    if (darkModeToggle) {
+        console.log("✅ Botón Dark Mode detectado en el DOM.");
+
+        darkModeToggle.addEventListener("change", function () {
+            document.body.classList.toggle("dark-mode"); // Agrega o quita la clase del modo oscuro
+
+            darkMode = !darkMode;
+
+            if (darkMode) {
+                console.log("🌙 Modo Oscuro ACTIVADO");
+                document.body.classList.add("dark-mode");
+            } else {
+                console.log("☀️ Modo Claro ACTIVADO");
+                document.body.classList.remove("dark-mode");
+            }
+        });
+    } else {
+        console.log("❌ Error: No se encontró el botón de Dark Mode.");
+    }
 
     // 📌 🖱️ Detectar 3 clics en menos de 1 segundo
     document.addEventListener("click", function () {

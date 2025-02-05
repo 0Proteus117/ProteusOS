@@ -12,6 +12,7 @@ body, html {
     color: #ffffff00;
     overflow-x: hidden; /* 🚀 Evita scroll horizontal inesperado */
     overflow-y: hidden;
+    transition: background 2s ease-in-out, color 2s ease-in-out;
 }
 
 #particles-js {
@@ -25,16 +26,19 @@ body, html {
 
 /* Restauración del contenedor del login */
 .login-container {
+    display: inline-block;
     position: absolute;
     top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.549);
-    padding: 40px;
-    border-radius: 15px;
+    padding: 10px 5%;
+    border-radius: 10px;
     text-align: center;
     box-shadow: 0px 0px 25px rgba(0, 247, 255, 0.8);
-    width: 90%x;
+    width: auto;
+    min-width: 30%;
+    max-width: 500px;
     border: 3px solid #00f7ff;
     z-index: 1;
     font-family: 'Orbitron', sans-serif;
@@ -49,13 +53,13 @@ body, html {
 
 .login-container input {
     width: 90%;
-    padding: 10px;
+    padding: 2%;
     margin-bottom: 15px;
     border: 2px solid #00f7ff;
-    background: transparent;
+    box-shadow: 0px 0px 15px rgba(0, 247, 255, 0.461);    background: transparent;
     color: #00f7ff;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 5px;
     font-family: 'Orbitron', sans-serif;
 }
@@ -67,11 +71,11 @@ body, html {
 }
 
 .login-container button {
-    width: 100%;
+    width: 75%;
     padding: 10px;
     background: #00f7ff;
     border: none;
-    color: black;
+    color: rgba(0, 0, 0, 0.658);
     font-size: 18px;
     font-weight: bold;
     text-transform: uppercase;
@@ -86,14 +90,14 @@ body, html {
 }
 /* Estilo del título */
 .title {
-    font-size: 30px;
+    font-size: 35px;
     letter-spacing: 4px;
     font-weight: bold;
     color: #00f7ff;
     text-transform: uppercase;
     text-align: center;
     border-bottom: 3px solid rgba(0, 247, 255, 0.9);
-    padding-bottom: 10px;
+    padding-bottom: 6%;
     text-shadow: 0px 0px 10px rgba(0, 247, 255, 0.8);
 }
     
@@ -134,16 +138,18 @@ body, html {
 
 /* 🎯 Nuevo estilo para botones */
 .hud-menu ul li button {
-    background: none;
+    background: transparent !important;
     border: none;
+    box-shadow: none !important;
     color: #00f7ff;
     font-size: 16px;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif;
-    transition: color 0.3s ease-in-out;
-    text-shadow: 0 0 5px rgba(0, 247, 255, 0.8);
+    transition: color 0.5s ease-in-out;
+    transition: transform 0.8s ease-out, opacity 0.3s ease-out;
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.8);
     display: block;
-    padding: 10px 0;
+    padding: 10px;
     cursor: pointer; /* Hace que el cursor cambie a "mano" */
 }
 
@@ -151,6 +157,8 @@ body, html {
 .hud-menu ul li button:hover {
     color: white;
     text-shadow: 0 0 10px rgba(0, 247, 255, 1);
+    transform: scale(1.3);
+    transition: transform 0.5s ease-in, opacity 0.3s ease-in;
 }
  
 
@@ -263,8 +271,8 @@ body, html {
 /* Ajuste del tamaño y comportamiento de cada ficha */
 .gallery-item {
     flex: 1 1 calc(20% - 15px); /* Ajusta el tamaño con espacio */
-    width: 150px;
-    height: 100px;
+    width: 100px;
+    height: 90px;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
@@ -354,6 +362,77 @@ fieldset {
     left: 50%;
     transform: translate(-50%, -50%);
     text-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
+}
+
+/* 🌙 Modo Oscuro - MANTÉN TU CÓDIGO */
+.dark-mode {
+    background: #0d0d0d;
+    color: #00f7ff;
+}
+
+.dark-mode .hud-menu {
+    background: rgba(10, 10, 10, 0.9);
+}
+
+.dark-mode .hud-menu button {
+    background: rgba(20, 20, 20, 0.9);
+    border-color: #00f7ff;
+    color: #00f7ff;
+}
+
+.dark-mode .gallery-container {
+    background: rgba(10, 10, 10, 0.9);
+}
+
+/* 🔥 Switch para el Dark Mode */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+}
+
+/* Ocultar checkbox real */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 🟢 Barra del switch */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(171, 165, 165, 0.674);
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* ⚪ Círculo deslizante */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 3.5px;
+  background-color: rgba(93, 88, 88, 0.674);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* ✅ Cuando está activado (modo oscuro) */
+input:checked + .slider {
+  background-color: #00f7ff;
+}
+
+/* ⬅️ Mueve el círculo cuando se activa */
+input:checked + .slider::before {
+  transform: translateX(24px);
 }
 
 
