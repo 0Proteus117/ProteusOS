@@ -6,10 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryButtons = document.querySelectorAll(".category-btn");
     const galleryContainer = document.getElementById("gallery-container");
     const gallery = document.getElementById("gallery");
-
-
     const stealthButton = document.getElementById("stealth");
-
     const usernameField = document.getElementById("username");
     const passwordField = document.getElementById("password");
     const loginForm = document.querySelector(".login-form");
@@ -19,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const mainUI = document.getElementById("mainUI");
     
     const darkModeToggle = document.getElementById("darkModeToggle");
+    
+
     // 🔹 Capturamos el botón y el submenú Bluetooth
+
     const bluetoothButton = document.getElementById("bluetooth");
     const bluetoothCategories = document.getElementById("bluetoothCategories");
 
@@ -28,9 +28,167 @@ document.addEventListener("DOMContentLoaded", function () {
     let clickCount = 0;
     let clickTimer;
     let inactivityTimer;
+    
+
+
+
     let galleryRecentlyOpened = false;
     let actualPassword = ""; // Guarda la contraseña real
     const symbols = "^][{+>?/=$@&~!-*#_%(})<("; // Símbolos aleatorios para la máscara
+
+
+
+    // 🎯 Evento para mostrar/ocultar el submenú WiFi con animación
+    wifiButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("Clic en WiFi detectado");
+
+        if (wifiCategories.classList.contains("hidden")) {
+            showSubmenu();
+        } else {
+            hideSubmenu();
+        }
+
+        // Ocultar la galería cuando se abre el submenú WiFi
+        hideGallery();
+    });
+
+    // 🎯 Evento para cerrar el submenú si se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+        setTimeout(() => {
+            const isClickInsideSubmenu = wifiCategories.contains(event.target);
+            const isClickInsideButton = event.target.closest(".category-btn") !== null;
+            const isClickInsideGallery = galleryContainer.contains(event.target);
+            const isClickOnWifiButton = wifiButton.contains(event.target);
+
+            if (!isClickInsideSubmenu && !isClickInsideButton && !isClickInsideGallery && !isClickOnWifiButton) {
+                console.log("📌 Clic fuera del HUD Submenu y Galería, ocultándolos...");
+                hideSubmenu();
+                hideGallery();
+            }
+        }, 100);
+    });
+
+    
+    // 🎯 Evento para abrir la galería cuando se hace clic en un botón del submenú
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.stopPropagation(); // Evita el cierre inmediato
+            const category = this.getAttribute("data-category");
+            showGallery(category);
+        });
+    });
+
+    // 🎯 Evento para cerrar la galería si se hace clic fuera de ella
+    document.addEventListener("click", function (event) {
+        if (!galleryContainer.contains(event.target) && !event.target.classList.contains("category-btn")) {
+            console.log("📌 Clic fuera de la galería, ocultándola...");
+            hideGallery();
+        }
+        
+
+        setTimeout(() => {
+            const isClickInsideSubmenu = bluetoothCategories.contains(event.target);
+            const isClickInsideButton = event.target.closest(".category-btn") !== null;
+            const isClickOnBluetoothButton = bluetoothButton.contains(event.target);
+
+            
+            // Si el clic NO fue en el submenú o en el botón Bluetooth, ocultamos el menú
+            if (!isClickInsideSubmenu && !isClickInsideButton && !isClickOnBluetoothButton) {
+                console.log("📌 Clic fuera del submenú Bluetooth, ocultándolo...");
+                bluetoothCategories.classList.remove("show");
+                bluetoothCategories.classList.add("hidden");
+            }
+        }, 100);
+    });
+
+    // 🎯 Evento para mostrar/ocultar el submenú Bluetooth
+    bluetoothButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        console.log("📡 Clic en Bluetooth detectado");
+
+        if (bluetoothCategories.classList.contains("hidden")) {
+            // 🔹 Primero, eliminamos la clase 'hidden' y agregamos la animación de entrada
+            bluetoothCategories.classList.remove("hidden", "fade-out");
+            bluetoothCategories.classList.add("show");
+        } else {
+            // 🔹 Primero agregamos la animación de salida
+            bluetoothCategories.classList.remove("show");
+            bluetoothCategories.classList.add("fade-out");
+
+            // ⏳ Esperamos que termine la animación antes de ocultarlo por completo
+            setTimeout(() => {
+                bluetoothCategories.classList.add("hidden");
+            }, 500); // 500ms = Duración de la animación CSS
+        }
+    });
+
+
+    // 📌 🔥 Función para activar/desactivar "Stealth Mode"
+    stealthButton.addEventListener("click", function () {
+        stealthMode = !stealthMode; // Alterna Stealth Mode
+    
+        if (stealthMode) {
+            console.log("🔹 Modo Stealth ACTIVADO");
+    
+            // 🔄 Solo ocultamos los elementos sin cambiar el color del fondo
+            document.body.classList.add("stealth-active");
+    
+            document.querySelectorAll("#menu, #gallery-container, .login-container, #mainUI").forEach(el => {
+                el.style.display = "none";
+            });
+    
+            startClock();
+            resetInactivityTimer();
+        } else {
+            console.log("🔹 Modo Stealth DESACTIVADO");
+    
+            // 🔄 Restauramos la UI sin cambiar el estado del Modo Oscuro
+            document.body.classList.remove("stealth-active");
+    
+            document.querySelectorAll("#menu, #gallery-container, .login-container, #mainUI").forEach(el => {
+                el.style.display = "block";
+            });
+    
+            const clock = document.getElementById("clock");
+            if (clock) clock.remove();
+    
+            clearTimeout(inactivityTimer);
+        }
+    });
+
+    // 📌 🖱️ Detectar 3 clics en menos de 1 segundo
+    document.addEventListener("click", function () {
+        if (stealthMode) {
+            clickCount++;
+
+            if (!clickTimer) {
+                clickTimer = setTimeout(() => {
+                    if (clickCount >= 3) {
+                        console.log("🔄 Redirigiendo al LOGIN...");
+                        window.location.reload();
+                    }
+                    clickCount = 0;
+                    clearTimeout(clickTimer);
+                    clickTimer = null;
+                }, 1000);
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 🎭 Evento para capturar la contraseña con máscara
     if (passwordField) {
@@ -127,37 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
     wifiCategories.classList.add("hidden");
     galleryContainer.classList.add("hidden");
 
-    // 🎯 Evento para mostrar/ocultar el submenú WiFi con animación
-    wifiButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("Clic en WiFi detectado");
-
-        if (wifiCategories.classList.contains("hidden")) {
-            showSubmenu();
-        } else {
-            hideSubmenu();
-        }
-
-        // Ocultar la galería cuando se abre el submenú WiFi
-        hideGallery();
-    });
-
-    // 🎯 Evento para cerrar el submenú si se hace clic fuera de él
-    document.addEventListener("click", function (event) {
-        setTimeout(() => {
-            const isClickInsideSubmenu = wifiCategories.contains(event.target);
-            const isClickInsideButton = event.target.closest(".category-btn") !== null;
-            const isClickInsideGallery = galleryContainer.contains(event.target);
-            const isClickOnWifiButton = wifiButton.contains(event.target);
-
-            if (!isClickInsideSubmenu && !isClickInsideButton && !isClickInsideGallery && !isClickOnWifiButton) {
-                console.log("📌 Clic fuera del HUD Submenu y Galería, ocultándolos...");
-                hideSubmenu();
-                hideGallery();
-            }
-        }, 100);
-    });
-
+    
     // 🔹 Función para mostrar la galería con animación
     function showGallery(category) {
         console.log(`✅ Clic detectado en: ${category}`);
@@ -201,58 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500); // ⏳ Espera 500ms para coincidir con la animación en CSS
     }
 
-    // 🎯 Evento para abrir la galería cuando se hace clic en un botón del submenú
-    categoryButtons.forEach(button => {
-        button.addEventListener("click", function (event) {
-            event.stopPropagation(); // Evita el cierre inmediato
-            const category = this.getAttribute("data-category");
-            showGallery(category);
-        });
-    });
-
-    // 🎯 Evento para cerrar la galería si se hace clic fuera de ella
-    document.addEventListener("click", function (event) {
-        if (!galleryContainer.contains(event.target) && !event.target.classList.contains("category-btn")) {
-            console.log("📌 Clic fuera de la galería, ocultándola...");
-            hideGallery();
-        }
-        
-
-        setTimeout(() => {
-            const isClickInsideSubmenu = bluetoothCategories.contains(event.target);
-            const isClickInsideButton = event.target.closest(".category-btn") !== null;
-            const isClickOnBluetoothButton = bluetoothButton.contains(event.target);
-
-            
-            // Si el clic NO fue en el submenú o en el botón Bluetooth, ocultamos el menú
-            if (!isClickInsideSubmenu && !isClickInsideButton && !isClickOnBluetoothButton) {
-                console.log("📌 Clic fuera del submenú Bluetooth, ocultándolo...");
-                bluetoothCategories.classList.remove("show");
-                bluetoothCategories.classList.add("hidden");
-            }
-        }, 100);
-    });
-
-    // 🎯 Evento para mostrar/ocultar el submenú Bluetooth
-    bluetoothButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        console.log("📡 Clic en Bluetooth detectado");
-
-        if (bluetoothCategories.classList.contains("hidden")) {
-            // 🔹 Primero, eliminamos la clase 'hidden' y agregamos la animación de entrada
-            bluetoothCategories.classList.remove("hidden", "fade-out");
-            bluetoothCategories.classList.add("show");
-        } else {
-            // 🔹 Primero agregamos la animación de salida
-            bluetoothCategories.classList.remove("show");
-            bluetoothCategories.classList.add("fade-out");
-
-            // ⏳ Esperamos que termine la animación antes de ocultarlo por completo
-            setTimeout(() => {
-                bluetoothCategories.classList.add("hidden");
-            }, 500); // 500ms = Duración de la animación CSS
-        }
-    });
+    
 
     // 📌 ⏰ Función para mostrar el reloj digital
     function startClock() {
@@ -274,38 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 1000);
     }
 
-    // 📌 🔥 Función para activar/desactivar "Stealth Mode"
-    stealthButton.addEventListener("click", function () {
-        stealthMode = !stealthMode; // Alterna Stealth Mode
     
-        if (stealthMode) {
-            console.log("🔹 Modo Stealth ACTIVADO");
-    
-            // 🔄 Solo ocultamos los elementos sin cambiar el color del fondo
-            document.body.classList.add("stealth-active");
-    
-            document.querySelectorAll("#menu, #gallery-container, .login-container, #mainUI").forEach(el => {
-                el.style.display = "none";
-            });
-    
-            startClock();
-            resetInactivityTimer();
-        } else {
-            console.log("🔹 Modo Stealth DESACTIVADO");
-    
-            // 🔄 Restauramos la UI sin cambiar el estado del Modo Oscuro
-            document.body.classList.remove("stealth-active");
-    
-            document.querySelectorAll("#menu, #gallery-container, .login-container, #mainUI").forEach(el => {
-                el.style.display = "block";
-            });
-    
-            const clock = document.getElementById("clock");
-            if (clock) clock.remove();
-    
-            clearTimeout(inactivityTimer);
-        }
-    });
 
     if (darkModeToggle) {
         console.log("✅ Botón Dark Mode detectado en el DOM.");
@@ -326,25 +372,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.log("❌ Error: No se encontró el botón de Dark Mode.");
     }
-
-    // 📌 🖱️ Detectar 3 clics en menos de 1 segundo
-    document.addEventListener("click", function () {
-        if (stealthMode) {
-            clickCount++;
-
-            if (!clickTimer) {
-                clickTimer = setTimeout(() => {
-                    if (clickCount >= 3) {
-                        console.log("🔄 Redirigiendo al LOGIN...");
-                        window.location.reload();
-                    }
-                    clickCount = 0;
-                    clearTimeout(clickTimer);
-                    clickTimer = null;
-                }, 1000);
-            }
-        }
-    });
 
     // 📌 ⏳ Detectar inactividad y redirigir a eBay después de 10 min
     function resetInactivityTimer() {

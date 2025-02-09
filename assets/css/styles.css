@@ -165,7 +165,6 @@ body, html {
 /* Estado inicial del submenú */
 .hud-submenu {
     position: absolute;
-    height: 5%;
     top: 7.4%;
     left: 0%;
     height: 5.5%;
@@ -353,6 +352,58 @@ fieldset {
 }
 
 
+/* 🔹 Submenú Bluetooth */
+#bluetoothCategories {
+    width: 100vw;
+    height: 5.5%;
+    top: 7.4%;
+    left: 0%;
+    background: rgba(74, 67, 67, 0.365);    
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px 2px 10px #00f7ff;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    font-family: 'Orbitron', sans-serif;
+    pointer-events: none; /* Bloquea clics cuando está oculto */
+}
+
+/* Cuando el submenú Bluetooth se activa */
+#bluetoothCategories.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    justify-content: center;
+    pointer-events: auto; /* Habilita clics cuando está visible */
+}
+
+/* 🎭 Clase para ocultar con animación más lenta */
+#bluetoothCategories.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* 🎩 MÁS SUAVE AL DESAPARECER */
+}
+
+/* 🔴 Clase para ocultar el submenú con animación */
+#bluetoothCategories.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
+
+#bluetoothCategories ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
 /* Reloj del modo stealth*/
 .clock {
     font-size: 12vw;  /* Hace que el tamaño de la fuente sea el 12% del ancho de la pantalla */
@@ -362,12 +413,14 @@ fieldset {
     left: 50%;
     transform: translate(-50%, -50%);
     text-shadow: 0 0 20px #00f7ff, 0 0 40px #00f7ff;
+    transition: background 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
-/* 🌙 Modo Oscuro - MANTÉN TU CÓDIGO */
+/* 🌙 Modo Oscuro */
 .dark-mode {
     background: #0d0d0d;
     color: #00f7ff;
+    transition: background 1s ease-in-out, color 1s ease-in-out;
 }
 
 .dark-mode .hud-menu {
@@ -435,6 +488,22 @@ input:checked + .slider::before {
   transform: translateX(24px);
 }
 
+/* 🔹 Clase para ocultar elementos en Stealth Mode */
+.stealth-active #menu,
+
+.stealth-active #gallery-container,
+
+.stealth-active .login-container,
+
+.stealth-active #mainUI {
+    display: none !important;
+}
+
+/* 🎭 Modo Stealth */
+.stealth-active {
+    background: white !important;
+    transition: background 1s ease-in-out;
+}
 
 
 
