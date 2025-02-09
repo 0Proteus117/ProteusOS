@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // ⏳ Esperamos que termine la animación antes de ocultarlo por completo
             setTimeout(() => {
                 bluetoothCategories.classList.add("hidden");
-            }, 500); // 500ms = Duración de la animación CSS
+            }, 5000); // 500ms = Duración de la animación CSS
         }
     });
 
@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // 🔥 Base de datos de imágenes con nombre y descripción
 const galleryData = {
     diplomacy: [
-        { title: "Escanear Redes", img: "/assets/images/Network-scan.png" },
+        { title: "Escanear Redes", img: "https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" },
         { title: "Conectar a WiFi", img: "assets/images/connect-wifi.png" },
         { title: "Gestión de Redes", img: "https://assets.codepen.io/2585/kara-eads-zcVArTF8Frs-unsplash.jpg" },
         { title: "Cambiar MAC", img: "https://assets.codepen.io/2585/pothos.jpeg" },
